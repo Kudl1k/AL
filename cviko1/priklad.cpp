@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -105,59 +106,38 @@ string find_name(vector<person> input, int ID)
 
 //implementujte funkci, která pro dané číslo n vrátí vektor prvočísel menších než n
 //využijte algoritmus „eratosthenovo síto“, viz prezentace z přednášek
-void erastothenes(int n)
+vector<int> erastothenes(int n)
 {
-    vector<int> primes(n+1, true);
-    vector<int> result;
+    vector<int>numbers;
+    vector<int>result;
+    int j = 0;
 
-    for (int i = 2; i * i <= n; i++) {
-        if (primes[i]) {
-            for (int j = i * i; j <= n; j += i) {
-                primes[j] = false;
+    fill_vector(numbers,0,n);
+
+    for (int i = 2; i < sqrt(n); i++)
+    {
+        if (numbers[i] != 0)
+        {
+            j = i * i;
+            while (j <= n)
+            {
+                numbers[j] = 0;
+                j += i;
             }
         }
     }
-
-    for (int i = 2; i <= n; i++) {
-        if (primes[i]) {
-            result.push_back(i);
+    for (int i = 2; i <= n; i++)
+    {
+        if (numbers[i] > 1)
+        {
+            result.push_back(numbers[i]);
         }
     }
-
-    for (int i = 0; i < result.size(); i++)
-    {
-        cout << result[i];
-    }
+    return result;
 }
 
 int main()
 {
-    // string s1, s2;
-    // cout << "Zadej retezec s1." << endl;
-    // cin >> s1;                              // načtení řetězce z klávesnice
-    // cout << "Zadej retezec s2." << endl;
-    // cin >> s2;
-    // cout << "Spojeni retezcu s1 + s2:  " << s1 + s2 << endl;
-    // cout << "Spojeni retezcu s1 + s2 po znacich:  ";
-    // print_characters_indexes(s1 + s2);
-    // cout << "Zdvojeni znaku v retezci s1: " << duplication(s1) << endl;
-    
-
-    // //vektor celych čísel, naplnění předem daným počtem prvků při inicializaci
-    // vector<int> vektor{ 1,2,3,4,5 };
-    // cout << "Prvky vektoru: ";
-    // print_vector_indexes(vektor);
-    // vektor.clear(); //vyprazdneni vektoru
-    // fill_vector(vektor, 1, 10); //naplneni cisly od 1 do 10
-    // cout << "Prvky vektoru: ";
-    // print_vector_iterator(vektor);
-
-    // //vektor struktur person, naplnění předem daným počtem prvků při inicializaci
-    // vector<person> vektor2{ {1,"Michal"},{2,"Martin"},{3,"Ondrej"},{4,"Tomas"} };
-    // //vyhledani osoby s ID 3
-    // cout << "Osoba s ID 3 je: " << find_name(vektor2, 3) << endl;
-    // cout << "Osoba s neexistujicim ID 6 je: " << find_name(vektor2, 6) << endl;
-
 
     //testy vašich funkci palindrom a erastothenes
 

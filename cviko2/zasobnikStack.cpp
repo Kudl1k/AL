@@ -18,13 +18,13 @@ bool arrayStack::isEmpty(){
 }
 
 bool arrayStack::push(int x){
-    if (isFull) return false;
+    if (isFull()) return false;
     data[sp++] = x;
     return true;
 }
 
 bool arrayStack::pop(int& x){
-    if (isEmpty) return false;
+    if (isEmpty()) return false;
     x = data[--sp];
     return true;
 }

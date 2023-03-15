@@ -34,21 +34,20 @@ void simulaceEshop(int zakazniku_celkem, int krok) //misto n a m radeji pouzijem
 		}
 		
 		
-		
 
 		for (int i = 0; i < 2 || !f[0].isEmpty(); i++)
 		{
 			f[0].dequeue(cislo_obslouzeneho);
-			cout << "prvni hotovo: " << cislo_obslouzeneho << endl;
+			//cout << "prvni hotovo: " << cislo_obslouzeneho << endl;
 		}
 		for (int i = 0; i < 2 || !f[1].isEmpty(); i++)
 		{
 			f[1].dequeue(cislo_obslouzeneho);
-			cout << "druhe hotovo: " << cislo_obslouzeneho << endl;
+			//cout << "druhe hotovo: " << cislo_obslouzeneho << endl;
 		}
 			
 		if (f[2].dequeue(cislo_obslouzeneho)){
-			cout << "treti hotovo: " << cislo_obslouzeneho << endl;
+			//cout << "treti hotovo: " << cislo_obslouzeneho << endl;
 		} 
 
 		if (f[0].isEmpty() && f[1].isEmpty() && f[2].isEmpty() && cislo_prichoziho >= zakazniku_celkem)

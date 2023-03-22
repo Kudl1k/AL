@@ -1,0 +1,19 @@
+13 5
+4 Frantisek
+7 Drahomira
+9 Michal
+11 Tomas
+3 Ondrej
+15 Michal
+1 Petr
+2 Radek
+13 Michal
+20 Radek
+14 Radek
+17 Radek
+19 Pavel
+8
+7
+4
+1
+4

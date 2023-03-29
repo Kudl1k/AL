@@ -13,16 +13,42 @@ struct person
 //setřídí záznamy ve vektrou podle id
 void selection_sort(vector<person>& v)
 {
-    for (int i = 0; i < v.size() - 2; i++)
+    for (int i = 0; i < v.size() - 1; i++)
     {
-        
+        int min = i;
+        for (int j = i+1; j < v.size(); j++)
+        {
+            if (v[j].ID < v[min].ID)
+            {
+                min = j;
+            }   
+        }
+        if (min != i)
+        {
+            swap(v[i],v[min]);
+        }
     }
-    
 }
 
 //vyhledá jméno osoby s příslušným ID
 string binary_search(vector<person> v, int id)
 {
+    int l = 0;
+    int r = v.size()-1;
+    int m = 0;
+    while (l <= r)
+    {
+        m = (l + r)/2;
+        if (id == v[m].ID)
+        {
+            return v[m].jmeno;
+        }
+        else if (id < v[m].ID){
+            r = m-1;
+        } else {
+            l = m +1;
+        }
+    }
     return "nenalezeno";
 }
 
@@ -46,13 +72,22 @@ int main()
     selection_sort(osoby); //seřazení
 
     //výpis pro kontrolu seřazení
-    /*for (int i = 0; i < osoby.size(); i++)
-        cout << osoby[i].id << " " << osoby[i].jmeno << endl;*/
+    for (int i = 0; i < osoby.size(); i++)
+        cout << osoby[i].ID << " " << osoby[i].jmeno << endl;
 
-    int klic;
+    int klic[pocetDotazu];
 
     //doplňte načteni kličů ze souboru a vyhledání příslušného jména pro každý z nich
 
+    for (int i = 0; i < pocetDotazu; i++)
+    {
+        soubor >> klic[i];
+    }
 
+    for (int i = 0; i < pocetDotazu; i++)
+    {
+        cout << i+1 <<". hledané jméno je: " << binary_search(osoby,klic[i]) << endl;
+    }
+    
     soubor.close(); //soubor zavřeme
 }

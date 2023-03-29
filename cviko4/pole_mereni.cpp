@@ -126,7 +126,7 @@ int main()
 	chrono::steady_clock::time_point begin = chrono::steady_clock::now();
 
 	double **maticeStejna;
-	int n = 400;
+	int n = 100;
 
 	allocate(maticeStejna,n,n);
 	fill2(maticeStejna,n,n);

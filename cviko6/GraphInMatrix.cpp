@@ -20,6 +20,10 @@ GraphInMatrix::GraphInMatrix(int _vertexCount)
 GraphInMatrix::GraphInMatrix(string path)
 {
     fstream file(path);
+    if (file.is_open()){
+        cout << "Soubor nejde otevrit";
+        exit(1);
+    }
     file >> vertexCount;
     while (true){
         int a = 0, b = 0;
@@ -73,7 +77,15 @@ void GraphInMatrix::ReportMatrix()
 
 void GraphInMatrix::ReportNeighbours()
 {
-
+    for (int i = 0; i < vertexCount; ++i) {
+        cout << "Vrchol " << i << "ma tyto sousedy: ";
+        for (int j = 0; j < vertexCount; ++j) {
+            if (adjacencyMatrix[i][j] == 1){
+                cout << j << ", ";
+            }
+        }
+        cout << endl;
+    }
 }
 
 void GraphInMatrix::ReportDegrees()

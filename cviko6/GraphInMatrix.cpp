@@ -19,16 +19,18 @@ GraphInMatrix::GraphInMatrix(int _vertexCount)
 
 GraphInMatrix::GraphInMatrix(string path)
 {
-    fstream file(path);
-    if (file.is_open()){
+    ifstream file(path);
+    if (!file.is_open()){
         cout << "Soubor nejde otevrit";
         exit(1);
     }
     file >> vertexCount;
+    Inicialize(vertexCount);
     while (true){
         int a = 0, b = 0;
         if (file.eof()) break;
-        file >> a >> b;
+        file >> a;
+        file >> b;
         AddEdge(a,b);
     }
     file.close();
@@ -51,7 +53,13 @@ void GraphInMatrix::AddEdge(int from, int to)
 
 int GraphInMatrix::VertexDegree(int vertex)
 {
-    return -1;
+    int counter = 0;
+    for (int i = 0; i < vertexCount; ++i) {
+        if (adjacencyMatrix[vertex][i] == 1){
+            counter++;
+        }
+    }
+    return counter;
 }
 
 void GraphInMatrix::ReportEdges()
@@ -77,8 +85,9 @@ void GraphInMatrix::ReportMatrix()
 
 void GraphInMatrix::ReportNeighbours()
 {
+    cout << "Sousedi:" << endl;
     for (int i = 0; i < vertexCount; ++i) {
-        cout << "Vrchol " << i << "ma tyto sousedy: ";
+        cout << "vrchol " << i << " ma tyto sousedy: ";
         for (int j = 0; j < vertexCount; ++j) {
             if (adjacencyMatrix[i][j] == 1){
                 cout << j << ", ";
@@ -90,16 +99,76 @@ void GraphInMatrix::ReportNeighbours()
 
 void GraphInMatrix::ReportDegrees()
 {
-
+    cout << "Stupne:" << endl;
+    for (int i = 0; i < vertexCount; ++i) {
+        int counter = 0;
+        cout << "vrchol " << i << " ma takovy stupen: ";
+        for (int j = 0; j < vertexCount; ++j) {
+            if (adjacencyMatrix[i][j] == 1){
+                counter++;
+            }
+        }
+        cout << counter << endl;
+    }
 }
 
 bool GraphInMatrix::IsComplete()
 {
+    int numEdges = 0;
+    for (int i = 0; i < vertexCount; i++) {
+        for (int j = i + 1; j < vertexCount; j++) {
+            if (adjacencyMatrix[i][j] == 1) {
+                numEdges++;
+            }
+        }
+    }
+    if (numEdges == vertexCount*(vertexCount-1)/2) {
+        return true;
+    }
+
     return false;
 }
 
 bool GraphInMatrix::IsStar()
 {
+    int numEdges = 0;
+    for (int i = 0; i < vertexCount; i++) {
+        for (int j = i + 1; j < vertexCount; j++) {
+            if (adjacencyMatrix[i][j] == 1) {
+                numEdges++;
+            }
+        }
+    }
+    if (numEdges == vertexCount-1) {
+        int center = -1;
+        bool isStar = true;
+
+        for (int i = 0; i < vertexCount; i++) {
+            int degree = 0;
+
+            for (int j = 0; j < vertexCount; j++) {
+                if (i != j && adjacencyMatrix[i][j] == 1) {
+                    degree++;
+                }
+            }
+
+            if (degree == vertexCount-1) {
+                if (center != -1) {
+                    isStar = false;
+                    break;
+                }
+                center = i;
+            } else if (degree != 1) {
+                isStar = false;
+                break;
+            }
+        }
+
+        if (isStar && center != -1) {
+            return true;
+        }
+    }
+
     return false;
 }
 

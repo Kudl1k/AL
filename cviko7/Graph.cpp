@@ -4,6 +4,11 @@ Graph::Graph(string path)
 {
     ifstream soubor(path);
 
+    if (!soubor.is_open()){
+        cout << "Soubor nelze otevrit!" << endl;
+        exit(1);
+    }
+
     int nodescount;
     soubor >> nodescount;
 
@@ -121,6 +126,35 @@ void Graph::BreadthFirst(int startNumber)
 vector<int> Graph::GetNodesWithGivenDistance(int startNumber, int distance)
 {
     vector <int> result;
+
+    Init();
+    queue<Node*> traverseQueue;
+
+    Node* startNode = nodes[startNumber];
+    startNode->state = OPEN;
+    startNode->distance = 0;
+
+    traverseQueue.push(startNode);
+
+    while (!traverseQueue.empty())
+    {
+        Node* actual = traverseQueue.front();
+        traverseQueue.pop();
+        if (actual->distance == distance){
+            result.push_back(actual->value);
+        }
+        for (Node* neighbour : actual->neighbours)
+        {
+            if (neighbour->state == FRESH)
+            {
+                neighbour->state = OPEN;
+                neighbour->distance = actual->distance + 1;
+                traverseQueue.push(neighbour);
+            }
+        }
+
+        actual->state = CLOSED;
+    }
     return result;
 }
 
@@ -128,5 +162,33 @@ vector<int> Graph::GetNodesWithGivenDistance(int startNumber, int distance)
 vector<int> Graph::ComponentSums()
 {
     vector <int> result;
+
+    Init();
+    queue<Node*> traverseQueue;
+    for (int i = 0; i < nodes.size(); ++i) {
+        Node* startNode = nodes[i];
+        startNode->state = OPEN;
+        startNode->distance = 0;
+        int sum = startNode->value;
+        traverseQueue.push(startNode);
+        while (!traverseQueue.empty())
+        {
+            Node* actual = traverseQueue.front();
+            traverseQueue.pop();
+            sum += actual->value;
+            for (Node* neighbour : actual->neighbours)
+            {
+                if (neighbour->state == FRESH)
+                {
+                    neighbour->state = OPEN;
+                    neighbour->distance = actual->distance + 1;
+                    traverseQueue.push(neighbour);
+                }
+            }
+            actual->state = CLOSED;
+        }
+        result.push_back(sum);
+        sum = 0;
+    }
     return result;
 }

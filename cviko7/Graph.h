@@ -16,7 +16,6 @@ using namespace std;
  */
 class Graph
 {
-
 private:
     /**
      * Struktura reprezentujici vrchol grafu

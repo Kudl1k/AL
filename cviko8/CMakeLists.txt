@@ -3,4 +3,4 @@ project(cviko8)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(cviko8 main.cpp)
+add_executable(cviko8 main.cpp BST.cpp)

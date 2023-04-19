@@ -1,3 +1,3 @@
-C:/Users/stepa/Documents/AL/cviko8/cmake-build-debug/CMakeFiles/cviko8.dir
-C:/Users/stepa/Documents/AL/cviko8/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/stepa/Documents/AL/cviko8/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/stepankudlacek/Desktop/AL/cviko8/cmake-build-debug/CMakeFiles/cviko8.dir
+/Users/stepankudlacek/Desktop/AL/cviko8/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/stepankudlacek/Desktop/AL/cviko8/cmake-build-debug/CMakeFiles/rebuild_cache.dir

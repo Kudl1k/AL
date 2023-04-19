@@ -6,7 +6,7 @@ void BST::Clear(node* nod)
     {
         Clear(nod->left);
         Clear(nod->right);
-        cout << "Mazu uzel s klicem: " << nod->key << endl;
+        //cout << "Mazu uzel s klicem: " << nod->key << endl;
         delete nod;
     }
 }
@@ -60,26 +60,18 @@ bool BST::Search(int value, node* nod)
 
 int BST::MinKey(node* nod)
 {
-    if (nod->key < nod->left->key && nod->key < nod->right->key){
-        return nod->key;
-    } else if (nod->left->key < nod->key && nod->left->key < nod->right->key) {
-        return nod->left->key;
-    } else if (nod->right->key < nod->key && nod->right->key < nod->left->key){
-        return nod->right->key;
+    if (nod->left != nullptr){
+        return MinKey(nod->left);
     }
-    return 0;
+    return nod->key;
 }
 
 int BST::MaxKey(node* nod)
 {
-    if (nod->key > nod->left->key && nod->key > nod->right->key){
-        return nod->key;
-    } else if (nod->left->key > nod->key && nod->left->key > nod->right->key) {
-        return nod->left->key;
-    } else if (nod->right->key > nod->key && nod->right->key > nod->left->key){
-        return nod->right->key;
+    if (nod->right != nullptr){
+        return MaxKey(nod->right);
     }
-    return 0;
+    return nod->key;
 }
 
 vector<int> BST::ToVector(node* nod)

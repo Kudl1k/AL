@@ -1,1 +1,1 @@
-CMakeLists.txt not found in C:\Users\stepa\Documents\AL Select CMakeLists.txt
+CMakeLists.txt not found in /Users/stepankudlacek/Desktop/AL Select CMakeLists.txt

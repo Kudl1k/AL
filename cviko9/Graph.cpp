@@ -34,13 +34,46 @@ Graph::~Graph()
 
 void Graph::Init()
 {
-
+    for (int i = 0; i < nodes.size(); ++i) {
+        nodes[i]->visited = false;
+    }
 }
 
 vector<int> Graph::SourceRemoval()
 {
-    Init();
+    Init(); // Initialize the graph
+
+    queue<Node*> q;
     vector<int> solution;
+
+    // Add all nodes with zero indegree to the queue
+    for (Node* nod : nodes)
+    {
+        if (nod->indegree == 0)
+        {
+            q.push(nod);
+            nod->visited = true; // Mark as visited
+        }
+    }
+
+    while (!q.empty())
+    {
+        Node* curr = q.front();
+        q.pop();
+        solution.push_back(curr->value); // Add node to the solution
+
+        // Update the indegree of neighbors
+        for (Node* neighbor : curr->neighbours)
+        {
+            neighbor->indegree--;
+
+            if (neighbor->indegree == 0 && !neighbor->visited)
+            {
+                q.push(neighbor);
+                neighbor->visited = true;
+            }
+        }
+    }
 
     return solution;
 }

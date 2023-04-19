@@ -40,7 +40,8 @@ private:
      */
     void Clear(node* nod);
 
-    void Search(int value, node *nod);
+
+    bool Search(string value, node* nod);
 
 public:
 

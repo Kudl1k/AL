@@ -24,8 +24,15 @@ void BST_string::Clear(node* nod)
 }
 
 
+
+
 bool BST_string::Search(string value) {
     return Search(value,root);
+}
+
+bool BST_string::Search(string value, node *nod) {
+
+    return true;
 }
 
 void BST_string::Insert(string value, node*& nod)

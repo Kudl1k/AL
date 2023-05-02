@@ -138,6 +138,7 @@ void GraphInMatrix::GenerateAllPaths(int startVertex)
         input.push_back(i);
 
     //doplnte
+
 }
 
 void GraphInMatrix::PrintShortestPath(int startVertex)

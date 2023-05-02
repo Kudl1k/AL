@@ -137,8 +137,7 @@ void GraphInMatrix::GenerateAllPaths(int startVertex)
     for (int i = 0; i < vertexCount; i++)//input pro funkci permutations
         input.push_back(i);
 
-    //doplnte
-
+    possiblePaths = Permutations(input);
 }
 
 void GraphInMatrix::PrintShortestPath(int startVertex)
@@ -147,7 +146,14 @@ void GraphInMatrix::PrintShortestPath(int startVertex)
     int min = INT32_MAX;
     vector<int> shortestPath;
 
-    //doplnte
+
+    for (int i = 0; i < possiblePaths.size(); ++i) {
+        if (min > possiblePaths[i].size()){
+            for (int j = 0; j < possiblePaths[i].size(); ++j) {
+                shortestPath.
+            }
+        }
+    }
 
     cout << "Nejkratsi cesta je: ";
     for (int num : shortestPath)

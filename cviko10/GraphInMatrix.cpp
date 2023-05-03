@@ -137,7 +137,14 @@ void GraphInMatrix::GenerateAllPaths(int startVertex)
     for (int i = 0; i < vertexCount; i++)//input pro funkci permutations
         input.push_back(i);
 
-    possiblePaths = Permutations(input);
+    vector<vector<int>> test = Permutations(input);
+
+    for (int i = 0; i < test.size(); ++i) {
+        if (test[i][0] == startVertex){
+            test[i].push_back(startVertex);
+            possiblePaths.push_back(test[i]);
+        }
+    }
 }
 
 void GraphInMatrix::PrintShortestPath(int startVertex)
@@ -145,12 +152,18 @@ void GraphInMatrix::PrintShortestPath(int startVertex)
     GenerateAllPaths(startVertex);
     int min = INT32_MAX;
     vector<int> shortestPath;
-
-
-    for (int i = 0; i < possiblePaths.size(); ++i) {
-        if (min > possiblePaths[i].size()){
+    int counter = 0;
+    for (int i = 0; i < possiblePaths.size(); i++) {
+        counter = 0;
+        for (int j = 1; j < possiblePaths[i].size(); j++) {
+            counter += adjacencyMatrix[startVertex][possiblePaths[i][j]];
+            startVertex = possiblePaths[i][j];
+        }
+        if (counter < min){
+            shortestPath.clear();
+            min = counter;
             for (int j = 0; j < possiblePaths[i].size(); ++j) {
-                shortestPath.
+                shortestPath.push_back(possiblePaths[i][j]);
             }
         }
     }

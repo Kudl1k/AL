@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char **argv)
 {
     cout << "--------------------------------------------------------------" << endl;
     cout << "Demonstrace generovani permutaci" << endl;
@@ -19,7 +19,7 @@ int main()
 
     cout << "Report vazeneho grafu:" << endl;
     cout << "--------------------------------------------------------------" << endl;
-    GraphInMatrix g("graph3.txt");
+    GraphInMatrix g(argv[1]);
 
     g.ReportMatrix();
     g.ReportEdges();

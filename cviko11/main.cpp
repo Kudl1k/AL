@@ -91,6 +91,10 @@ int main(int argc, char **argv)
     for (item it : max)
         cout << it.ID << " ";
     cout << endl;
+    cout << "Jejich hmotnost: ";
+    for (item it : max) {
+        cout << it.weight << " ";
+    } cout << endl;
     cout << "Celkova cena: " << maximumPrice << endl;
 
 
